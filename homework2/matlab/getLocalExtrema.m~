@@ -19,20 +19,9 @@ function locs = getLocalExtrema(DoGPyramid, DoGLevels, ...
                             
     % TODO: STUDENT IMPLEMENTATION GOES HERE
     
-    [r,c,d] = size(DoGPyramid);
-    locs = [];
-    for l=1:d
-        for x=1:c
-            for y=1:r
-                if (abs(DoGPyramid(y,x,l)) > th_contrast)
-                    if (abs(PrincipalCurvature(y,x,l)) <= th_r)
-                        locs = [locs; x y DoGLevels(l)];
-                    end
-                end
-            end
-        end
-    end
+    [r,c,d] = size(DoGPyramid)
     
+    , DoGLevels
     
     
 end
