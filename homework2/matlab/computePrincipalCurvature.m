@@ -14,12 +14,13 @@
 function [PrincipalCurvature] = computePrincipalCurvature(DoGPyramid)
     % TODO: STUDENT IMPLEMENTATION GOES HERE
     [r,c,d] = size(DoGPyramid);
+    PrincipalCurvature = zeros(r,c,d);
     for n=1:d
         [FX,FY] = gradient(DoGPyramid(:,:,n));
         [FXX,FYX] = gradient(FX);
         [FXY,FYY] = gradient(FY);
         
-        PrincipalCurvature = zeros(r,c,d);
+        
                 
         pc  = ((FXX+FYY).^2)./(FXX.*FYY - FXY.*FXY);
       

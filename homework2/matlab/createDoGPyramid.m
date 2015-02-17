@@ -18,6 +18,6 @@ function [DoGPyramid, DoGLevels] = createDoGPyramid(GaussianPyramid, levels)
     for n = 1:(length(levels)-1)
         DoGPyramid(:,:,n) = GaussianPyramid(:,:,n+1) - GaussianPyramid(:,:,n);        
     end
-    %DoGLevels = levels(2:length(levels));
-    DoGLevels = levels(1:length(levels) - 1);
+    DoGLevels = levels(2:length(levels));
+    %DoGLevels = levels(1:length(levels) - 1);
 end
