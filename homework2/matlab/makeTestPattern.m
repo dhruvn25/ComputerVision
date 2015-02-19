@@ -11,4 +11,13 @@
 % usage: [compareX, compareY] = makeTestPattern(patchWidth, nbits)
 function [compareX, compareY] = makeTestPattern(patchWidth, nbits)
     % TODO: STUDENT IMPLEMENTATION GOES HERE
+    
+    
+    
+    %Uniform Distro
+    compareX = round(-(patchWidth^2)/2 + [(patchWidth^2)]*rand(nbits,1));
+    compareY = round(-(patchWidth^2)/2 + [(patchWidth^2)]*rand(nbits,1));
+    
+    
+    
 end
