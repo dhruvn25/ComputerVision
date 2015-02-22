@@ -14,5 +14,19 @@
 function [matches] = briefMatch(desc1, desc2, ratio)
     % TODO: STUDENT IMPLEMENTATION GOES HERE
     
+    [D,I] = pdist2(desc1,desc2,'hamming','smallest',2);
+    matches = [];
+    size(desc1)
+    size(desc2)
+%     desc1
+%     desc2
+    [r,c] = size(D)
+    D(:,1)
+    for i=1:size(D,2)
+        if D(1,i) < ratio*D(2,i)
+            matches = [matches; I(1,i) i];
+        end
+    end
     
+      
 end

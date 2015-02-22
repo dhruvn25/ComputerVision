@@ -22,10 +22,10 @@ function [locs, GaussianPyramid] = DoGdetector(im, sigma0, k, levels, th_contras
     
     
     GaussianPyramid = createGaussianPyramid(im, sigma0, k, levels);
-    displayPyramid(GaussianPyramid);
+    %displayPyramid(GaussianPyramid);
     
     [DGP, DGL] = createDoGPyramid(GaussianPyramid, levels);
-    displayPyramid(DGP);
+    %displayPyramid(DGP);
     PR = computePrincipalCurvature(DGP);
     
     locs = getLocalExtrema(DGP, DGL, PR, th_contrast, th_r);

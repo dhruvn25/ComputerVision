@@ -20,7 +20,8 @@ function [locs, desc] = brief(im)
     th_r = 12;
     th_contrast = 0.03;
     [locs,GP] = DoGdetector(im,sigma0,k, levels, th_contrast,th_r);
-    [compareX,compareY] = makeTestPattern(9,256);
+    load('testPattern.mat');
+    %[compareX,compareY] = makeTestPattern(9,256);
     
     [locs,desc] = computeBrief(im,locs,levels,compareX,compareY);
     

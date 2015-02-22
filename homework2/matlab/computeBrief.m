@@ -16,8 +16,8 @@
 
 function [locs,desc] = computeBrief(im, locs, levels, compareX, compareY)
     % TODO: STUDENT IMPLEMENTATION GOES HERE
-    [cx_x,cx_y] = ind2sub([9 9],compareX);
-    [cy_x,cy_y] = ind2sub([9 9],compareY);
+    [cx_y,cx_x] = ind2sub([9 9],compareX);
+    [cy_y,cy_x] = ind2sub([9 9],compareY);
     
     
     desc = [];
@@ -26,16 +26,16 @@ function [locs,desc] = computeBrief(im, locs, levels, compareX, compareY)
         x = locs(i,1);
         y = locs(i,2);
         
-        if ( min(cx_x) + x > 0 && min(cy_x) + x > 0 &&
-             min(cx_y) + y > 0 && min(cy_y) + y > 0 &&
-             max(cx_x) + x < size(im,2) && max(cy_x) + x < size(im,2) &&
+        if ( min(cx_x) + x > 0 && min(cy_x) + x > 0 && ...
+             min(cx_y) + y > 0 && min(cy_y) + y > 0 && ...
+             max(cx_x) + x < size(im,2) && max(cy_x) + x < size(im,2) && ...
              max(cx_y) + y < size(im,1) && max(cy_y) + y < size(im,1))
-            
+                
             this_desc = zeros(length(compareX),1);
             for n=1:length(compareX)
-                this_desc(n) = im(x + cx_x(n), y + cx_y(n)) < im(x + cy_x(n), y + cy_y(n));
+                this_desc(n) = im(y + cx_y(n),x + cx_x(n)) < im(y + cy_y(n),x + cy_x(n));
             end
-            desc = [desc; this_desc];
+            desc = [desc; this_desc'];
             final_locs = [final_locs; locs(i,:)];
         end
     end
