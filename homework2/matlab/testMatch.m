@@ -1,5 +1,5 @@
-image1 = '../data/model_chickenbroth.jpg';
-image2 = '../data/model_chickenbroth.jpg';
+image1 = '../data/pf_scan_scaled.jpg';
+image2 = '../data/pf_stand.jpg';
 
 grey_image1 = im_to_gray(image1);
 grey_image2 = im_to_gray(image2);
@@ -9,7 +9,7 @@ grey_image2 = im_to_gray(image2);
 [locs1,desc1] = brief(grey_image1);
 [locs2,desc2] = brief(grey_image2);
 
-ratio = .8;
+ratio = .7;
 
 matches = briefMatch(desc1,desc2,ratio);
 locsflipped1 = locs1;

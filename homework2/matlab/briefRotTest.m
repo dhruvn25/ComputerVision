@@ -24,8 +24,8 @@ for i=1:36
     locsflipped2(:,1) = locs2(:,2);
     locsflipped2(:,2) = locs2(:,1);
     %plotMatches(grey_image1, grey_image2, matches, locsflipped1, locsflipped2);
-    size(matches)
-    matchnums(i) = size(matches,1)
+    %size(matches)
+    matchnums(i) = size(matches,1);
 end
 
 bar(matchnums);
