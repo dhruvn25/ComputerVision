@@ -5,6 +5,7 @@ rect = [328, 213, 419, 265];
 load('../data/carSequence.mat');
 [r c l n] = size(sequence);
 for i = 1:(n-1)
+    i
     im1 = sequence(:,:,:,i);
     im2 = sequence(:,:,:,i+1);
     

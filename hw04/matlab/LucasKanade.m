@@ -3,12 +3,14 @@ It = im2double(rgb2gray(It));
 It1 = im2double(rgb2gray(It1));
 % 330,215
 % 420,270
-T = It(rect(1):rect(3),rect(2):rect(4));
+T = It(rect(2):rect(4),rect(1):rect(3));
+imshow(T);
+pause;
 lastdp = [1;1];
 dp = [0;0];
 p  = [0;0];
 %Warp I with with W(x;p) to compute I(W(x;p))
- [r c] = size(T)
+ [r c] = size(T);
  [FX,FY] = gradient(It1);
  
 while (sum(lastdp-dp) > .1)
@@ -19,10 +21,10 @@ while (sum(lastdp-dp) > .1)
  
  for r = 1:r
      for c = 1:c
-         x = round(rect(1) + r);
-         y = round(rect(2) + c);
-         W = [1 0 p(1);0 1 p(2)]*[x;y;1];
-         
+         x = round(rect(2) + r);
+         y = round(rect(1) + c);
+         %W = [1 0 p(1);0 1 p(2)]*[x;y;1];
+         W = [1 0 p(1);0 1 p(2)]*[y;x;1];
          IW(r,c) = It1(round(W(1)),round(W(2)));
          gI(r,c,:) = [FX(x,y) FY(x,y)] * [1 0;0 1];
         
@@ -48,7 +50,7 @@ while (sum(lastdp-dp) > .1)
 
 end
 
-u = p(1);
-v = p(2);
+u = p(1)
+v = p(2)
 
 end
