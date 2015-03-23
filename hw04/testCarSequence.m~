@@ -1,0 +1,16 @@
+clc;
+close all;
+rect = [328, 213, 419, 265];
+
+[r c l n] = size(sequence);
+for i = 1:(n-1)
+    im1 = sequence(:,:,:,i);
+    im2 = sequence(:,:,:,i+1);
+    [u,v] = LucasKanade(It,It1,rect)
+    rect(1) = rect(1) + u;
+    rect(2) = rect(2) + v;
+    
+    rect(3) 
+    
+end
+
