@@ -14,9 +14,12 @@ p  = [0;0];
 %Warp I with with W(x;p) to compute I(W(x;p))
  %[r c] = size(T)
  [FX,FY] = gradient(It1);
- 
- 
- 
+%  imshow(It);
+%  hold on;
+%  plot(rect(1),rect(2),'bO');
+%  plot(rect(3),rect(4),'bO');
+%  hold off;
+%  pause(.001);
 while (sum(abs(lastdp-dp)) > .01)
 
  H = zeros(2,2);
@@ -26,8 +29,10 @@ while (sum(abs(lastdp-dp)) > .01)
  Yq2 = Yq + p(2);
  
  IW = interp2(It1,Xq2,Yq2);
+ 
  gX = interp2(FX,Xq2,Yq2);
  gY = interp2(FY,Xq2,Yq2);
+ 
  gI(:,:,1) = gX;
  gI(:,:,2) = gY;
  gI2 = reshape(gI,[size(gI,1)*size(gI,2) 2]);

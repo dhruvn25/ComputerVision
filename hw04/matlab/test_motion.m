@@ -1,6 +1,6 @@
 % function test_motion(path_to_images, numimages)
 
-path_to_images = 'Sequence1';
+path_to_images = '../data/Sequence1';
 numimages = 21;
 
 % test_motion makes a movie (motion.avi) using the sequence of binary 
@@ -32,7 +32,7 @@ try
         % Runs the function to estimate dominant motion
         disp(['Processing pair of image ' num2str(frame-1) ' and ' num2str(frame)]);
         save tmp.mat;
-        [motion_img] = SubtractDominantMotion(img1, img2);
+        [motion_img] = SubtractDominantMotion(img1, img2)
         % Superimposes the binary image on img2, and adds it to the movie
         currframe = repmat(img2 / 255.0, [1 1 3]);
         motion_img = double(motion_img);
@@ -42,7 +42,9 @@ try
         mov=addframe(mov,currframe);
         Fs{frame} = currframe;
         % Prepare for processing next pair
-         imshow(uint8(currframe));
+         %imshow(uint8(currframe));
+         imshow(currframe);
+         pause(.001);
 %         figure,imshow(uint8(img2));
 %         figure
          img1 = img2;

@@ -4,6 +4,7 @@ close all;
 rect = [328.0, 213.0, 419.0, 265.0];
 load('../data/carSequence.mat');
 [r c l n] = size(sequence);
+box = rect;
 for i = 1:(n-1)
     i
     im1 = sequence(:,:,:,i);
@@ -27,7 +28,9 @@ for i = 1:(n-1)
     rect(3) = (rect(3) + u);
     rect(4) = (rect(4) + v);
     
-    
+    box = [box;rect];
     
 end
+
+save('carPosition.mat','box');
 
