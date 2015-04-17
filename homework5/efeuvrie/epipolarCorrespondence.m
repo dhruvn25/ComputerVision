@@ -1,17 +1,18 @@
 function [x2, y2] = epipolarCorrespondence(im1, im2, F, x1, y1)
-windowSize = 8;
-%im1 = im2double(rgb2gray(im1));
-%im2 = im2double(rgb2gray(im2));
+windowSize = 60;
+im1 = im2double(rgb2gray(im1));
+im2 = im2double(rgb2gray(im2));
 
 x1list = linspace((x1-round(windowSize/2)),(x1+round(windowSize/2)),(windowSize+1));
 y1list = linspace((y1-round(windowSize/2)),(y1+round(windowSize/2)),(windowSize+1));
 [Xq,Yq] = meshgrid(x1list,y1list);
 intensity1(:,:,1) = interp2(double(im1(:,:,1)),Xq,Yq);
-intensity1(:,:,2) = interp2(double(im1(:,:,2)),Xq,Yq);
-intensity1(:,:,3) = interp2(double(im1(:,:,3)),Xq,Yq);
+%intensity1(:,:,2) = interp2(double(im1(:,:,2)),Xq,Yq);
+%intensity1(:,:,3) = interp2(double(im1(:,:,3)),Xq,Yq);
 
 %intensity1 = im1((y1-round(windowSize/2)):(y1+round(windowSize/2)), (x1-round(windowSize/2):(x1+round(windowSize/2))));
-
+x2best = 1;
+y2best = 1;
 
 epipolarM = F*[x1;y1;1];
 bestDiff = 100000;
@@ -28,28 +29,27 @@ syms x y;
 %imshow(im2);
 %hold on;
 %lines = epipolarLine(F,[x1 y1]);
-for i=1:.01:size(im1,2)
- %  eqn = [i y 1]*epipolarM == 0;
-   %solY = double(solve(eqn, y))
-   y2 = (ep(1,1)*i + lines(1,3))/lines(1,2);
-   if(y2 <= size(im1,1) && y2 >= 1)
-       x2 = i;
-       %y2 = round(double(solY));
+for i=1:.2:size(im1,1)
+    
+   x2 = -1*(epipolarM(2)*i + epipolarM(3))/epipolarM(1);
+   
+   if(x2 <= size(im1,2) && x2 >= 1)
+       y2 = i;
        %plot(x2,y2,'rO');
     %check window
     x2list = linspace((x2-round(windowSize/2)),(x2+round(windowSize/2)),(windowSize+1));
     y2list = linspace((y2-round(windowSize/2)),(y2+round(windowSize/2)),(windowSize+1));
     [Xq,Yq] = meshgrid(x2list,y2list);
     intensity2(:,:,1) = interp2(double(im2(:,:,1)),Xq,Yq);
-    intensity2(:,:,2) = interp2(double(im2(:,:,2)),Xq,Yq);
-    intensity2(:,:,3) = interp2(double(im2(:,:,3)),Xq,Yq);
+    %intensity2(:,:,2) = interp2(double(im2(:,:,2)),Xq,Yq);
+    %intensity2(:,:,3) = interp2(double(im2(:,:,3)),Xq,Yq);
 
     diff = abs(intensity1-intensity2);
-    difference = sum(diff(:));
+    difference = sum(diff(:)) + abs(x2^2 - x1^2) + abs(y2^2-y1^2);
     if (difference < bestDiff)
-        x2best = x2
-        y2best = y2
-        bestDiff = difference
+        x2best = x2;
+        y2best = y2;
+        bestDiff = difference;
     end
    end
    

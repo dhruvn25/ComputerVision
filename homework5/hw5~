@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+%Gummi|065|=)
+\title{\textbf{CV Homework 4}}
+\author{Eric Feuvrier Danziger\\
+		}
+\date{}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\begin{document}
+
+\maketitle
+
+\section*{1.1 Math}
+$A^TA$ is the Hessian. It is the sum of all pairs of gradients\\
+$\begin{bmatrix}
+\sum{dxdx} \sum{dxdy}\\
+\sum{dxdy} \sum{dydy}\\
+\end{bmatrix}$\\
+$A^TA$ has to be invertible so that the $\Delta{p}$ can be calculated.\\
+
+\section*{1.3 Car Tracking}
+The rectangle is only translated, and tracks the car as follows:
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{carFrame20.jpg}
+\caption{ 20 }
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{carFrame50.jpg}
+\caption{ 50 }
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{carFrame100.jpg}
+\caption{ 100 }
+\end{figure}
+
+
+\section*{1.4 Failure Modes for Translating L-K Tracking}
+There are several reasons the tracker could fail. The primary is occlusion, where the object being tracked is lost and the tracker then templates a new object. 
+
+Even partial occlusion could cause problems. A possible solution to this is to implement a more robust method of updating the template than just every frame - mabe by verifying that there are greater than some number of feature matches with the last few templates and the current guess. 
+
+Another possibility is low frame rate, where the car translates too far for the tracker to update, depending on if the tracker is constrained on number of iterations. 
+
+
+
+\section*{2.1 Affine Equation}
+To optimize Eq 2 \\
+$I_{t+1} = I_t + \sum{w_cB_c}$
+\\
+We want to minimize \\
+$J(w) = (I_{t+1} - I_t - \sum{w_cB_c})^2$
+\\
+Then w has the closed form solution
+$w_c = \sum_x{B_c(x)*[I_{t+1}(x) - I_t(x)]}$
+
+%\subsection*{1.4.a}
+%$\begin{bmatrix}
+%x\\
+%y\\
+%1\\ \end{bmatrix} = \begin{bmatrix}
+%h11 & h12 & h13\\
+%h21 & h22 & h23\\
+%h31 & h32 & h33\\ \end{bmatrix} 
+
+\subsection*{2.3 Book Tracking}
+This is the comparison between the normal and Basis L-K tracker. The normal tracker is yellow, the Basis one is blue. The normal tracker appears to be better for this set of images. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=150mm]{bookFrame30.jpg}
+\caption{Frame 30}
+\end{figure}
+In the first part of the images, the trackers overlap. 
+\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=150mm]{bookFrame150.jpg}
+\caption{Frame 150}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=150mm]{bookFrame248.jpg}
+\caption{Frame 248}
+\end{figure}
+
+
+
+\end{document}
